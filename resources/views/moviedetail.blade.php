@@ -2,43 +2,47 @@
 
 @section('container')
     <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="/" class="btn btn-secondary">< Kembali </a>
+        <button class="btn btn-secondary" onclick="history.go(-1)"><i class="bi bi-arrow-left"></i> Kembali</button>
         <a href="/" class="btn btn-light">Lihat Semua Film</a>
     </div>
-    <div class="card mt-3" style="background-color:#e7e7e7">
-        <div class="card m-4">
-            <div class="card-body">
-                <div class="d-flex">
-                    <img src="{{ asset("/storage/" . $movie->photo) }}" style="max-height: 380px">
-                    <div class="container" style="width: 33%;">
-                        <h4>{{$movie->title }}</h4>
-                        <p>
+    <div class="card mt-3" style="background-color:#000">
+        <div class="card">
+            <div class="card-body bg-dark">
+                <div class="d-flex ms-4 justify-content-center pb-3">
+                    <div class="d-flex justify-content-center" style="width: 40%">
+                        <img src="{{ asset("/storage/" . $movie->photo) }}" style="height: 400px;" class="img-fluid">
+                    </div>
+                    <div class="container"  style="width: 60%">
+                        <h4 class="text-white">{{$movie->title }}</h4>
+                        <p class="text-white">
                             <strong>Rating: <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" style="width:20px; height:20px;margin-top:-5px;"> {{$movie->rating }} / 10</strong>
                         </p>
-                        <p>{{$movie->description }}</p>
-                        <p>
+                        <p class="text-white">{{$movie->description }}</p>
+                        <p class="text-white">
                             <strong>Category : </strong><a href="/category/{{$movie->genre_id }}" style="text-decoration: none">{{$movie->genre->name }}</a>
                         </p>
                     </div>
-                    <div class="container" style="width: 33%;">
-                        <h4>EPISODE</h4>
-                        <table class="table table-striped table-bordered mt-3">
-                            <thead>
-                                <tr style="background-color: white;text-align:center">
-                                    <td width=40%>Episode</td>
-                                    <td>Title</td>
+                </div>
+                <div class="container mt-4 " style="width:70%">
+                    <h4 class="text-white text-center">EPISODE LISTS</h4>
+                    <table class="table table-bordered table-hover table-dark mt-3 text-white justify-content-center">
+                        <thead>
+                            <tr style="background-color: black;text-align:center">
+                                <td width=40%>Episode</td>
+                                <td>Title</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($episodes as $item)
+                                <tr>
+                                    <td>Episode {{$item->episode }}</td>
+                                    <td>: {{$item->title}}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($episodes as $item)
-                                    <tr>
-                                        <td>Episode {{$item->episode }}</td>
-                                        <td>: {{$item->title}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{$episodes->links()}}
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $episodes->links() }}
                     </div>
                 </div>
             </div>
