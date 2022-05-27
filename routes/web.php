@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, "home"]);
 
+// Route::get("/", [Controller::class, "home"]);
+
 Route::get("/movie/{id}", [Controller::class, "movieDetail"]);
 
 Route::get("/category/{id}", [Controller::class, "movieCategory"]);
